@@ -243,40 +243,44 @@ void init_opengl(void)
 //Copy pics from phone and update program 
 //on the next class
 
-
+//These global variables might be wrong
+float w = 20.0f;
+float dir = 1.0f;
+float pos[2] = {0.0f+w, g.yres/2.0f};
+float boxr = 1.0f, boxg = 0.0f, boxb = 0.0f;
 
 void physics()
 {
-	
-}
-
-void render()
-{
-	static float w = 20.0f;
-	static float dir = 25.0f;
-	static float pos[2] = {0.0f+w, g.yres/2.0f};
-	//
-	glClear(GL_COLOR_BUFFER_BIT);
-	//Draw box.
-	glPushMatrix();
-	glColor3ub(150, 160, 220);
-	glTranslatef(pos[0], pos[1], 0.0f);
-	glBegin(GL_QUADS);
-		glVertex2f(-w, -w);
-		glVertex2f(-w,  w);
-		glVertex2f( w,  w);
-		glVertex2f( w, -w);
-	glEnd();
-	glPopMatrix();
+	//This might be wrong
 	pos[0] += dir;
 	if (pos[0] >= (g.xres-w)) {
 		pos[0] = (g.xres-w);
 		dir = -dir;
+		boxr = 0.0f;
+		boxb = 1.0f;
 	}
 	if (pos[0] <= w) {
 		pos[0] = w;
 		dir = -dir;
+		boxr = 1.0f;
+		boxb = 0.0f;
 	}
+}
+
+void render()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	//Drawbox.
+	glPushMatrix();
+	glColor3f(boxr, boxg, boxb);
+	glTranslatef(pos[0], pos[1], 0.0f);
+	glBegin(GL_QUADS);
+		glVertex2f(-w, -w);
+	    	glVertex2f(-w,  w);
+		glVertex2f( w,  w);
+		glVertex2f( w, -w);
+	glEnd();
+	glPopMatrix();
 }
 
 
