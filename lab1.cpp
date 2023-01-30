@@ -238,10 +238,16 @@ void init_opengl(void)
 	//Set the screen background color
 	glClearColor(0.1, 0.1, 0.1, 1.0);
 }
+//Starting from here >>> I'm making edit but 
+//I'm unsure of what I need to do. 1/30/2023
+//Copy pics from phone and update program 
+//on the next class
+
+
 
 void physics()
 {
-
+	
 }
 
 void render()
